@@ -18,6 +18,10 @@ One page, **SYNC**:
 
 Loading a project never starts a sync by itself.
 
+![MPC Folder Sync on the MPC screen](docs/screenshot.png)
+
+A step-by-step guide with a configuration example is in the [manual](docs/manual.md).
+
 ## Installation
 
 Unzip the release and copy the folder `Noirescripts - VST - MPC Folder Sync` to the plugin folder (`VST2 Plugins`) of your MPC drive, the same way as for other third-party plugins. If you have the old effect version 1.0 installed, remove it first (see "Limits" below).
