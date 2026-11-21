@@ -1,26 +1,30 @@
 # MPC Folder Sync
 
-Instrument-Plugin (Plugin-Programm, erscheint auf dem Hauptbildschirm unter „Plugins“) für Akai-MPC-Standalone-Geräte von Noirescripts. Es kopiert per Knopfdruck einen Ordner der MPC mit **rsync über SSH** auf einen Server oder ein NAS. Es erzeugt keinen Klang. **rsync und ein SSH-Client sind im Plugin enthalten** (statisch gebaut für arm32 und arm64), die MPC muss nichts mitbringen.
+An instrument plugin (shows up as a plugin program on the main screen, under "Plugins") for Akai MPC standalone devices, by Noirescripts. At the press of a button it copies a folder from the MPC to a server or NAS using **rsync over SSH**. It produces no sound. **rsync and an SSH client are bundled with the plugin** (statically built for arm32 and arm64), so the MPC does not need to provide anything.
 
-## Bedienung auf der MPC
+## Using it on the MPC
 
-Eine Seite **SYNC**:
+One page, **SYNC**:
 
-| Element | Funktion |
+| Element | Function |
 |---|---|
-| Target | Ziel 1–8 aus `foldersync.conf` (Q-Link 13 oder Antippen) |
-| Start Sync | Taster: einmal drücken startet den Sync, leuchtet als „RUNNING“ solange er läuft |
-| Status | nur Anzeige: Ready, Running, Done, Failed, No rsync, No ssh, No config, Bad target, Cannot run |
-| Dry Run | An = Probelauf (`rsync -n`), es wird nichts kopiert |
-| Name / Source / Destination | nur Text: gewähltes Ziel, Quellordner auf der MPC, Ziel als `user@host:ordner` |
-| Progress | nur Text: Fortschritt des Syncs in Prozent (Gesamtfortschritt von rsync), nach dem Ende 100% |
-| Job 1–8 | Liste aller Ziele aus der Konfiguration untereinander, das gewählte mit `>` markiert |
+| Target | Target 1-8 from `foldersync.conf` (Q-Link 13 or tap) |
+| Start Sync | Push button: one press starts the sync, shows "RUNNING" while it runs |
+| Status | Display only: Ready, Running, Done, Failed, No rsync, No ssh, No config, Bad target, Cannot run |
+| Dry Run | On = trial run (`rsync -n`), nothing is copied |
+| Name / Source / Destination | Text only: selected target, source folder on the MPC, destination as `user@host:folder` |
+| Progress | Text only: sync progress in percent (overall progress from rsync), 100% when finished |
+| Job 1-8 | List of all targets from the configuration, one under the other, the selected one marked with `>` |
 
-Ein geladenes Projekt startet nie von selbst einen Sync.
+Loading a project never starts a sync by itself.
 
-## Konfiguration
+## Installation
 
-Plugins haben auf der MPC keine Texteingabe. Adresse, Ordner und Schlüssel stehen in:
+Unzip the release and copy the folder `Noirescripts - VST - MPC Folder Sync` to the plugin folder (`VST2 Plugins`) of your MPC drive, the same way as for other third-party plugins. If you have the old effect version 1.0 installed, remove it first (see "Limits" below).
+
+## Configuration
+
+Plugins on the MPC have no text input. Address, folder and credentials are set in a text file inside the plugin folder on the MPC drive:
 
 `Noirescripts - VST - MPC Folder Sync/Content/foldersync.conf`
 
@@ -33,55 +37,56 @@ source = /media/MPC-Projekte/
 dest   = /volume1/backup/mpc/
 key    = id_ed25519
 delete = no
-# rsync_path = /usr/syno/bin/rsync   (nur falls rsync auf dem Ziel nicht im Standard-PATH liegt)
-exclude = *.tmp                       # beliebig oft; Muster, die nicht kopiert werden
+# rsync_path = /usr/syno/bin/rsync   (only if rsync is not in the default PATH on the target)
+exclude = *.tmp                       # may be repeated; patterns that are not copied
 exclude = .Trashes/
 ```
 
-**Excludes:** pro Zeile ein Muster (rsync-Syntax: `*.tmp`, `Ordner/`, `Samples/Cache/`). Mit `delete = yes` werden ausgeschlossene Dateien auf dem Ziel nicht gelöscht. Der Prozentwert ist der Gesamtfortschritt; rsync zählt dazu vorher alle Dateien, bei sehr großen Ordnern dauert der Start daher etwas länger.
+Each `[Name]` block is one job (up to 8). The job is selected with "Target" on the MPC (the number is its position in the file). The file is read again every time you press Start Sync, so changes apply immediately. The texts on screen refresh when you change the target, after a sync, and when the plugin loads.
 
-Die Datei enthält alle Felder erklärt. Den richtigen `source`-Pfad zeigt `Content/foldersync.log` nach dem ersten Start („Eingehängte Laufwerke“). Bitte die **IP-Adresse** eintragen (`.local`-Namen werden nicht aufgelöst).
+**Excludes:** one pattern per line (rsync syntax: `*.tmp`, `Folder/`, `Samples/Cache/`). With `delete = yes`, excluded files on the target are not deleted. The percentage is overall progress; rsync counts all files first, so very large folders take a little longer to start.
 
-## Anmeldung per Passwort (einfachster Weg)
+The file explains all fields in comments. The correct `source` path is shown in `Content/foldersync.log` after the first start (section "Eingehaengte Laufwerke", the list of mounted drives). Please enter the **IP address** of the target (`.local` names are not resolved).
 
-In `foldersync.conf` statt `key` die Zeile `password = ...` eintragen (Rest der Zeile, Leerzeichen und Sonderzeichen erlaubt). Das Passwort geht nur per Umgebungsvariable an den SSH-Client, nicht in Befehlszeile oder Log. Ist zusätzlich `key` gesetzt, gilt der Schlüssel. Das Ziel muss Passwort-Anmeldung per SSH erlauben (bei Synology/QNAP üblich, bei Servern mit `PasswordAuthentication no` nicht). Das Passwort liegt im Klartext auf dem Laufwerk: ein eigenes Konto nur für den Sync verwenden.
+## Login with a password (easiest)
 
-## Anmeldung per SSH-Schlüssel (sicherer, einmalig am Rechner einrichten)
+In `foldersync.conf`, use the line `password = ...` instead of `key` (the rest of the line is used, spaces and special characters are allowed). The password is passed to the SSH client through an environment variable only, never on the command line or in the log. If `key` is set as well, the key is used. The target must allow SSH password login (common on Synology/QNAP, not on servers with `PasswordAuthentication no`). The password is stored in plain text on the drive, so use a dedicated account just for the sync.
 
-1. `ssh-keygen -t ed25519 -f id_ed25519 -N ""` (ohne Passwort).
-2. Inhalt von `id_ed25519.pub` auf dem Ziel in `~/.ssh/authorized_keys` eintragen.
-3. Die Datei `id_ed25519` (privat!) in den `Content`-Ordner des Plugins legen. Sie wird beim Sync automatisch für den mitgelieferten SSH-Client (Dropbear) umgewandelt.
-4. Beim ersten Verbinden wird der Host-Schlüssel des Ziels gemerkt (`Content/home/.ssh/known_hosts`); ändert er sich später, wird die Verbindung abgelehnt.
+## Login with an SSH key (more secure, one-time setup on your computer)
 
-Der private Schlüssel liegt im Klartext auf dem Laufwerk: nur für ein eigenes Konto verwenden, das möglichst nur den Zielordner schreiben darf. Auf dem Ziel müssen ein SSH-Server und **rsync** laufen.
+1. `ssh-keygen -t ed25519 -f id_ed25519 -N ""` (no passphrase).
+2. Add the contents of `id_ed25519.pub` to `~/.ssh/authorized_keys` of the user on the target.
+3. Put the file `id_ed25519` (private!) into the plugin's `Content` folder. It is converted automatically for the bundled SSH client (Dropbear) at sync time.
+4. On first connect the target's host key is remembered (`Content/home/.ssh/known_hosts`). If it changes later, the connection is refused.
 
-## Was passiert beim Sync
+The private key is stored in plain text on the drive: use it only for a dedicated account that, ideally, can write to the target folder only. The target needs an SSH server and **rsync**.
 
-`rsync -rtv --partial --modify-window=2 --timeout=30 --stats` (plus `--delete` bei `delete = yes`). Bewusst `-rt` statt `-a`, weil FAT/exFAT keine Rechte kennen. `source` mit `/` am Ende kopiert den Inhalt, ohne `/` den Ordner selbst. Die komplette Ausgabe steht in `Content/foldersync.log`.
+## What happens during a sync
 
-Für die Dauer des Syncs werden rsync, SSH-Client und Schlüssel als Kopien nach `/tmp` gelegt (Laufwerke sind oft „noexec“, FAT meldet alle Dateien als offen) und danach gelöscht. Der Sync läuft in einem eigenen Thread, nie im Audio-Thread.
+`rsync -rtv --partial --modify-window=2 --timeout=30 --stats --info=progress2 --no-inc-recursive` (plus `--exclude=...` per pattern and `--delete` if `delete = yes`). `-rt` is used instead of `-a` on purpose, because FAT/exFAT drives have no permissions or owners. A `/` at the end of `source` copies the contents of the folder, without it the folder itself. The full output is written to `Content/foldersync.log`.
 
-## Grenzen / nicht auf Hardware getestet
+For the duration of the sync, rsync, the SSH client and the key are copied to `/tmp` (drives are often mounted "noexec", and FAT reports all files as world-accessible) and deleted afterwards. The sync runs in its own thread, never on the audio thread.
 
-- Getestet: Build arm32/arm64/native, Validierung, Host-Simulator, Sync gegen einen lokalen SSH-Server mit den gebauten Programmen (Dry Run, Kopieren, Löschen, OpenSSH-Schlüssel, Fehlerfälle, Abbruch, Aufräumen). Die ARM-Programme selbst konnten hier nicht ausgeführt werden.
-- Auf der MPC zu prüfen: ob `/tmp` ausführbar ist (sonst Status „Cannot run“), ob Status und Texte sofort neu gezeichnet werden und wie der Taster aussieht.
-- Textanzeigen sind auf etwa 31 Zeichen begrenzt; bei langen Pfaden wird der Anfang durch `...` ersetzt.
-- Plugins laufen ungesichert im MPC-Prozess: Projekt vor dem ersten Test speichern.
-- Version 1.1 und neuer haben eine neue Plugin-ID (`N2fs`). Die alte Effekt-Version (1.0) vorher aus dem Ordner `VST2 Plugins` entfernen.
+## Limits / not tested on hardware
 
-## Lizenz
+- Tested: build for arm32, arm64 and native, validation, host simulator, and sync against a local SSH server with the built programs (dry run, copying, deleting, OpenSSH key, password login, excludes, progress, error cases, abort, cleanup). The ARM programs themselves could not be run in the test environment.
+- To check on the MPC: whether `/tmp` is executable (otherwise status "Cannot run"), whether status and texts redraw immediately, and how the button looks.
+- Text displays are limited to about 31 characters; for long paths the start is replaced by `...`.
+- Plugins run unprotected inside the MPC process: save your project before the first test.
+- Versions 1.1 and newer have a new plugin ID (`N2fs`). Remove the old effect version (1.0) from the `VST2 Plugins` folder first.
 
-Plugin-Code: MIT, siehe `LICENSE`. Nicht mit Akai Professional oder inMusic verbunden. „MPC“ und „Akai Professional“ sind Marken von inMusic Brands, Inc., „VST“ ist eine Marke von Steinberg Media Technologies GmbH.
+## Licence
 
-Plugin-Code MIT. Mitgeliefert: rsync 3.4.1 (GPLv3+), Dropbear (MIT-Stil); Details und Quelltext-Hinweis in `Content/bin/THIRD_PARTY.txt`, Bauanleitung in `BUILDING-BINARIES.md`.
+Plugin code: MIT, see `LICENSE`. Not affiliated with Akai Professional or inMusic. "MPC" and "Akai Professional" are trademarks of inMusic Brands, Inc.; "VST" is a trademark of Steinberg Media Technologies GmbH.
 
-## Build
+Bundled programs: rsync 3.4.1 (GPLv3+) and Dropbear (MIT-style). Details and a pointer to the source code are in `Content/bin/THIRD_PARTY.txt`; build instructions are in `BUILDING-BINARIES.md`.
 
-Das Repo enthält nur das Plugin. Zum Bauen wird das [MPC Plugin Builder SDK](https://github.com/inmusic-software/mpc-plugin-builder-sdk) (MIT, inMusic) gebraucht:
-dieses Repo nach `<SDK>/plugins/MPC Folder Sync/` kopieren oder klonen.
+## Building
+
+This repository contains only the plugin. To build it you need the [MPC Plugin Builder SDK](https://github.com/inmusic-software/mpc-plugin-builder-sdk) (MIT, inMusic): copy or clone this repository into `<SDK>/plugins/MPC Folder Sync/`.
 
 ```
-python3 skin-src/make_skin.py      # erzeugt skins/ (Oberfläche)
+python3 skin-src/make_skin.py      # generates skins/ (the on-screen UI)
 python3 tools/build.py "plugins/MPC Folder Sync"
 python3 tools/package.py "plugins/MPC Folder Sync"
 ```
