@@ -109,7 +109,7 @@
                                     "showWhenDataModelInvalid": "Show",
                                     "whenVisible": "Always",
                                     "boundsType": "Absolute",
-                                    "bounds": "15 12 248 36"
+                                    "bounds": "15 12 263 36"
                                 }
                             },
                             {
@@ -126,7 +126,7 @@
                                                 "version": 1,
                                                 "name": "Titillium Web",
                                                 "style": "Regular",
-                                                "height": 40.0
+                                                "height": 30.0
                                             },
                                             "colour": "ffffffff",
                                             "justification": "left",
@@ -146,7 +146,7 @@
                                     "showWhenDataModelInvalid": "Show",
                                     "whenVisible": "Always",
                                     "boundsType": "Absolute",
-                                    "bounds": "15 50 248 50"
+                                    "bounds": "15 54 263 46"
                                 }
                             }
                         ]
@@ -207,7 +207,7 @@
                                     "showWhenDataModelInvalid": "Show",
                                     "whenVisible": "Always",
                                     "boundsType": "Absolute",
-                                    "bounds": "15 12 248 36"
+                                    "bounds": "15 12 263 36"
                                 }
                             },
                             {
@@ -244,7 +244,7 @@
                                     "showWhenDataModelInvalid": "Show",
                                     "whenVisible": "Always",
                                     "boundsType": "Absolute",
-                                    "bounds": "15 50 248 50"
+                                    "bounds": "15 50 263 50"
                                 }
                             }
                         ]
@@ -285,9 +285,9 @@
                                                 "version": 1,
                                                 "name": "Titillium Web",
                                                 "style": "Regular",
-                                                "height": 24.0
+                                                "height": 48.0
                                             },
-                                            "colour": "ff6a6a6c",
+                                            "colour": "ff9a9a9c",
                                             "justification": "left",
                                             "case": "Original"
                                         },
@@ -305,7 +305,7 @@
                                     "showWhenDataModelInvalid": "Show",
                                     "whenVisible": "Always",
                                     "boundsType": "Absolute",
-                                    "bounds": "15 2 200 38"
+                                    "bounds": "15 8 270 64"
                                 }
                             },
                             {
@@ -322,7 +322,7 @@
                                                 "version": 1,
                                                 "name": "Titillium Web",
                                                 "style": "Regular",
-                                                "height": 28.0
+                                                "height": 56.0
                                             },
                                             "colour": "ffffffff",
                                             "justification": "left",
@@ -342,7 +342,7 @@
                                     "showWhenDataModelInvalid": "Show",
                                     "whenVisible": "Always",
                                     "boundsType": "Absolute",
-                                    "bounds": "225 2 1000 38"
+                                    "bounds": "290 0 944 76"
                                 }
                             }
                         ]
@@ -383,7 +383,7 @@
                                                 "version": 1,
                                                 "name": "Titillium Web",
                                                 "style": "Regular",
-                                                "height": 24.0
+                                                "height": 48.0
                                             },
                                             "colour": "ffffffff",
                                             "justification": "left",
@@ -403,7 +403,68 @@
                                     "showWhenDataModelInvalid": "Show",
                                     "whenVisible": "Always",
                                     "boundsType": "Absolute",
-                                    "bounds": "15 0 700 32"
+                                    "bounds": "15 0 610 76"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "jobLineActive",
+                    "value": {
+                        "version": 2,
+                        "actions": [],
+                        "backgroundData": {
+                            "version": 1,
+                            "focussed": {
+                                "version": 1,
+                                "colour": "00000000",
+                                "image": ""
+                            },
+                            "unfocussed": {
+                                "version": 1,
+                                "colour": "00000000",
+                                "image": ""
+                            }
+                        },
+                        "ignoreMousePresses": true,
+                        "disableCoarseDataWheel": false,
+                        "componentsData": [
+                            {
+                                "version": 2,
+                                "componentData": {
+                                    "version": 1,
+                                    "name": "value",
+                                    "type": "Label",
+                                    "data": {
+                                        "version": 1,
+                                        "textStyle": {
+                                            "version": 1,
+                                            "font": {
+                                                "version": 1,
+                                                "name": "Titillium Web",
+                                                "style": "Regular",
+                                                "height": 48.0
+                                            },
+                                            "colour": "ffd31145",
+                                            "justification": "left",
+                                            "case": "Original"
+                                        },
+                                        "type": "Value",
+                                        "handleName": "Data"
+                                    }
+                                },
+                                "handle remapping": {
+                                    "version": 1,
+                                    "map": []
+                                },
+                                "bounds": {
+                                    "version": 1,
+                                    "acceptsHWFocus": "No",
+                                    "showWhenDataModelInvalid": "Show",
+                                    "whenVisible": "Always",
+                                    "boundsType": "Absolute",
+                                    "bounds": "15 0 610 76"
                                 }
                             }
                         ]
@@ -791,20 +852,6 @@
         },
         "replacementStrings": [
             {
-                "key": "Parameter 2",
-                "value": [
-                    "Ready",
-                    "Running",
-                    "Done",
-                    "Failed",
-                    "No rsync",
-                    "No ssh",
-                    "No config",
-                    "Bad target",
-                    "Cannot run"
-                ]
-            },
-            {
                 "key": "Parameter 3",
                 "value": [
                     "Off",
@@ -961,35 +1008,6 @@
                             "version": 2,
                             "componentData": {
                                 "version": 1,
-                                "name": "Name",
-                                "type": "textLine",
-                                "data": {
-                                    "version": 1,
-                                    "handleName": "Data"
-                                }
-                            },
-                            "handle remapping": {
-                                "version": 1,
-                                "map": [
-                                    {
-                                        "key": "Data",
-                                        "value": "Parameter 6"
-                                    }
-                                ]
-                            },
-                            "bounds": {
-                                "version": 1,
-                                "acceptsHWFocus": "No",
-                                "showWhenDataModelInvalid": "Show",
-                                "whenVisible": "Always",
-                                "boundsType": "Absolute",
-                                "bounds": "23 170 1234 42"
-                            }
-                        },
-                        {
-                            "version": 2,
-                            "componentData": {
-                                "version": 1,
                                 "name": "Source",
                                 "type": "textLine",
                                 "data": {
@@ -1012,7 +1030,7 @@
                                 "showWhenDataModelInvalid": "Show",
                                 "whenVisible": "Always",
                                 "boundsType": "Absolute",
-                                "bounds": "23 214 1234 42"
+                                "bounds": "23 164 1234 76"
                             }
                         },
                         {
@@ -1041,43 +1059,14 @@
                                 "showWhenDataModelInvalid": "Show",
                                 "whenVisible": "Always",
                                 "boundsType": "Absolute",
-                                "bounds": "23 258 1234 42"
+                                "bounds": "23 240 1234 76"
                             }
                         },
                         {
                             "version": 2,
                             "componentData": {
                                 "version": 1,
-                                "name": "Progress",
-                                "type": "textLine",
-                                "data": {
-                                    "version": 1,
-                                    "handleName": "Data"
-                                }
-                            },
-                            "handle remapping": {
-                                "version": 1,
-                                "map": [
-                                    {
-                                        "key": "Data",
-                                        "value": "Parameter 15"
-                                    }
-                                ]
-                            },
-                            "bounds": {
-                                "version": 1,
-                                "acceptsHWFocus": "No",
-                                "showWhenDataModelInvalid": "Show",
-                                "whenVisible": "Always",
-                                "boundsType": "Absolute",
-                                "bounds": "23 302 1234 42"
-                            }
-                        },
-                        {
-                            "version": 2,
-                            "componentData": {
-                                "version": 1,
-                                "name": "Job 1",
+                                "name": "jobLine 1",
                                 "type": "jobLine",
                                 "data": {
                                     "version": 1,
@@ -1099,14 +1088,43 @@
                                 "showWhenDataModelInvalid": "Show",
                                 "whenVisible": "Always",
                                 "boundsType": "Absolute",
-                                "bounds": "23 350 720 32"
+                                "bounds": "23 316 610 76"
                             }
                         },
                         {
                             "version": 2,
                             "componentData": {
                                 "version": 1,
-                                "name": "Job 2",
+                                "name": "jobLineActive 1",
+                                "type": "jobLineActive",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "Parameter 16"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "No",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "23 316 610 76"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "jobLine 2",
                                 "type": "jobLine",
                                 "data": {
                                     "version": 1,
@@ -1128,14 +1146,43 @@
                                 "showWhenDataModelInvalid": "Show",
                                 "whenVisible": "Always",
                                 "boundsType": "Absolute",
-                                "bounds": "23 382 720 32"
+                                "bounds": "23 392 610 76"
                             }
                         },
                         {
                             "version": 2,
                             "componentData": {
                                 "version": 1,
-                                "name": "Job 3",
+                                "name": "jobLineActive 2",
+                                "type": "jobLineActive",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "Parameter 17"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "No",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "23 392 610 76"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "jobLine 3",
                                 "type": "jobLine",
                                 "data": {
                                     "version": 1,
@@ -1157,14 +1204,43 @@
                                 "showWhenDataModelInvalid": "Show",
                                 "whenVisible": "Always",
                                 "boundsType": "Absolute",
-                                "bounds": "23 414 720 32"
+                                "bounds": "23 468 610 76"
                             }
                         },
                         {
                             "version": 2,
                             "componentData": {
                                 "version": 1,
-                                "name": "Job 4",
+                                "name": "jobLineActive 3",
+                                "type": "jobLineActive",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "Parameter 18"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "No",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "23 468 610 76"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "jobLine 4",
                                 "type": "jobLine",
                                 "data": {
                                     "version": 1,
@@ -1186,14 +1262,43 @@
                                 "showWhenDataModelInvalid": "Show",
                                 "whenVisible": "Always",
                                 "boundsType": "Absolute",
-                                "bounds": "23 446 720 32"
+                                "bounds": "23 544 610 76"
                             }
                         },
                         {
                             "version": 2,
                             "componentData": {
                                 "version": 1,
-                                "name": "Job 5",
+                                "name": "jobLineActive 4",
+                                "type": "jobLineActive",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "Parameter 19"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "No",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "23 544 610 76"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "jobLine 5",
                                 "type": "jobLine",
                                 "data": {
                                     "version": 1,
@@ -1215,14 +1320,43 @@
                                 "showWhenDataModelInvalid": "Show",
                                 "whenVisible": "Always",
                                 "boundsType": "Absolute",
-                                "bounds": "23 478 720 32"
+                                "bounds": "655 316 610 76"
                             }
                         },
                         {
                             "version": 2,
                             "componentData": {
                                 "version": 1,
-                                "name": "Job 6",
+                                "name": "jobLineActive 5",
+                                "type": "jobLineActive",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "Parameter 20"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "No",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "655 316 610 76"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "jobLine 6",
                                 "type": "jobLine",
                                 "data": {
                                     "version": 1,
@@ -1244,14 +1378,43 @@
                                 "showWhenDataModelInvalid": "Show",
                                 "whenVisible": "Always",
                                 "boundsType": "Absolute",
-                                "bounds": "23 510 720 32"
+                                "bounds": "655 392 610 76"
                             }
                         },
                         {
                             "version": 2,
                             "componentData": {
                                 "version": 1,
-                                "name": "Job 7",
+                                "name": "jobLineActive 6",
+                                "type": "jobLineActive",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "Parameter 21"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "No",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "655 392 610 76"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "jobLine 7",
                                 "type": "jobLine",
                                 "data": {
                                     "version": 1,
@@ -1273,14 +1436,43 @@
                                 "showWhenDataModelInvalid": "Show",
                                 "whenVisible": "Always",
                                 "boundsType": "Absolute",
-                                "bounds": "23 542 720 32"
+                                "bounds": "655 468 610 76"
                             }
                         },
                         {
                             "version": 2,
                             "componentData": {
                                 "version": 1,
-                                "name": "Job 8",
+                                "name": "jobLineActive 7",
+                                "type": "jobLineActive",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "Parameter 22"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "No",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "655 468 610 76"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "jobLine 8",
                                 "type": "jobLine",
                                 "data": {
                                     "version": 1,
@@ -1302,7 +1494,36 @@
                                 "showWhenDataModelInvalid": "Show",
                                 "whenVisible": "Always",
                                 "boundsType": "Absolute",
-                                "bounds": "23 574 720 32"
+                                "bounds": "655 544 610 76"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "jobLineActive 8",
+                                "type": "jobLineActive",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "Parameter 23"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "No",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "655 544 610 76"
                             }
                         }
                     ]

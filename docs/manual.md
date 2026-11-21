@@ -59,8 +59,10 @@ A `/` at the end of `source` copies the contents of the folder, without it the f
 4. Then the **Status**, which shows whether a sync is currently running.
 5. The **Dry Run** switch is for testing the job without copying anything. It is also a good way
    to check the SSH login.
-6. Below that, the name, the source and destination path and the **progress** of the copy
-   process in % are shown for the selected job.
-7. Below that, all configured jobs are listed. The currently selected job is marked with `>`.
+6. The **Target** field shows the job number and its name.
+7. While a sync runs, the **Status** shows the progress in %, for example `Running 45%`.
+8. Below that, the source and destination path of the selected job are shown in large text.
+9. At the bottom all configured jobs are listed in two columns of four. The currently selected job
+   is marked with `>` and shown in the accent colour.
 
 The complete output of every run is written to `Content/foldersync.log`.

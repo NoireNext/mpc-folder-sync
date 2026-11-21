@@ -55,17 +55,19 @@ def lbl(name, typ, colour, h, bounds, just="left"):
 defs = []
 # Wert zum Einstellen (Target): Name + Wert als Text, Doppeltipp = grosser Eingabe-Dialog
 defs.append(("valueText", g.component_definition(g.control_actions("knob overlay"), [
-    g.focus_child(S), lbl("name", "Name", S["muted"], 26.0, "15 12 248 36"), lbl("value", "Value", S["text"], 40.0, "15 50 248 50")], "00000000")))
+    g.focus_child(S), lbl("name", "Name", S["muted"], 26.0, "15 12 263 36"), lbl("value", "Value", S["text"], 30.0, "15 54 263 46")], "00000000")))
 # Reine Textanzeige (Status): kein Fokus, keine Bedienung
 defs.append(("statusText", g.component_definition([], [
-    lbl("name", "Name", S["muted"], 26.0, "15 12 248 36"), lbl("value", "Value", S["text"], 40.0, "15 50 248 50")], "00000000", ignore_mouse=True)))
-# Zeile mit Name links und Text rechts (Name / Quelle / Ziel)
+    lbl("name", "Name", S["muted"], 26.0, "15 12 263 36"), lbl("value", "Value", S["text"], 40.0, "15 50 263 50")], "00000000", ignore_mouse=True)))
+# Zeile mit Name links und Text rechts (Source / Destination), Schrift ca. doppelt so gross wie zuvor
+LABEL2 = "ff9a9a9c"
 defs.append(("textLine", g.component_definition([], [
-    lbl("name", "Name", S["muted"], 24.0, "15 2 200 38"), lbl("value", "Value", S["text"], 28.0, "225 2 1000 38")], "00000000", ignore_mouse=True)))
-# Zeile der Jobliste: nur der Text (z. B. "> 2  Backup NAS"), das gewaehlte Ziel ist mit > markiert
+    lbl("name", "Name", LABEL2, 48.0, "15 8 270 64"), lbl("value", "Value", S["text"], 56.0, "290 0 944 76")], "00000000", ignore_mouse=True)))
+# Zeile der Jobliste: nur der Text. Die aktive Zeile kommt aus einem eigenen Parameter und ist in der Akzentfarbe.
 defs.append(("jobLine", g.component_definition([], [
-    lbl("value", "Value", S["text"], 24.0, "15 0 700 32")], "00000000", ignore_mouse=True)))
-# Start-Taster: kurzer Druck, springt von selbst zurueck
+    lbl("value", "Value", S["text"], 48.0, "15 0 610 76")], "00000000", ignore_mouse=True)))
+defs.append(("jobLineActive", g.component_definition([], [
+    lbl("value", "Value", S["accent"], 48.0, "15 0 610 76")], "00000000", ignore_mouse=True)))
 btn = g.button_data("start_on.png", "start_off.png", 1, 1)
 defs.append(("pushButton", g.component_definition([g.action("Mouse Down", "Q-Link", "Data", "")], [
     g.focus_child(S), E("button", "Button", btn, "19 18 240 70", "No", "Show", "Always")], "00000000")))
@@ -85,18 +87,22 @@ kids = [
     slot(2, "Status", "statusText", "Parameter 2", focus="No", inv="Show"),
     slot(3, "Dry Run", "toggle", "Parameter 3"),
 ]
-for n, (nm, p) in enumerate([("Name", 6), ("Source", 4), ("Destination", 5), ("Progress", 15)]):
-    kids.append(E(nm, "textLine", g.obj(("version", 1), ("handleName", "Data")), "23 %d 1234 42" % (170 + 44 * n),
+for n, (nm, p) in enumerate([("Source", 4), ("Destination", 5)]):
+    kids.append(E(nm, "textLine", g.obj(("version", 1), ("handleName", "Data")), "23 %d 1234 76" % (164 + 76 * n),
                   "No", "Show", "Always", remap=[("Data", "Parameter %d" % p)]))
 
+# Jobliste in 2 Spalten zu je 4 Zeilen: Job 1-4 links, Job 5-8 rechts
 for i in range(8):
-    kids.append(E("Job %d" % (i + 1), "jobLine", g.obj(("version", 1), ("handleName", "Data")), "23 %d 720 32" % (350 + 32 * i),
-                  "No", "Show", "Always", remap=[("Data", "Parameter %d" % (7 + i))]))
+    x = 23 + 632 * (i // 4)
+    y = 316 + 76 * (i % 4)
+    for kind, first in (("jobLine", 7), ("jobLineActive", 16)):
+        kids.append(E("%s %d" % (kind, i + 1), kind, g.obj(("version", 1), ("handleName", "Data")), "%d %d 610 76" % (x, y),
+                      "No", "Show", "Always", remap=[("Data", "Parameter %d" % (first + i))]))
 
 tab = g.component_definition([], kids, S["background"])
 rects = ["%d %d %d %d" % (g.SLOT_X[0] - g.QLINK_PAD, g.SLOT_Y[0] - g.QLINK_PAD,
                           g.SLOT_X[3] + g.SLOT_W + g.QLINK_PAD - (g.SLOT_X[0] - g.QLINK_PAD), g.SLOT_H + 2 * g.QLINK_PAD)]
-repl = [g.obj(("key", "Parameter 2"), ("value", STATUS)), g.obj(("key", "Parameter 3"), ("value", ["Off", "On"]))]
+repl = [g.obj(("key", "Parameter 3"), ("value", ["Off", "On"]))]   # Status/Target-Text kommt vom Plugin selbst
 page = g.obj(("version", 1),
              ("componentDefinitions", g.obj(("version", 2), ("importFiles", []),
                                             ("localComponentDefinitions", [g.obj(("key", k), ("value", v)) for k, v in defs]))),

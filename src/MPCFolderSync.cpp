@@ -69,6 +69,8 @@ enum ParamIndex
     kJob1,         // kJob1 .. kJob1+7: reine Textanzeige, eine Zeile der Jobliste pro Ziel
     kJobLast = kJob1 + 7,
     kProgress,     // reine Textanzeige: Fortschritt in Prozent während des Syncs
+    kJobA1,        // kJobA1 .. kJobA1+7: wie Job 1-8, aber nur die aktive Zeile hat Text (wird farbig angezeigt)
+    kJobALast = kJobA1 + 7,
     kNumParams
 };
 
@@ -187,6 +189,13 @@ std::string fitText(const std::string& s)
     constexpr size_t kMax = 31;
     if (s.size() <= kMax) return s;
     return "..." + s.substr(s.size() - (kMax - 3));
+}
+
+// Namen: der Anfang ist wichtiger als das Ende.
+std::string fitHead(const std::string& s, size_t maxChars)
+{
+    if (s.size() <= maxChars) return s;
+    return s.substr(0, maxChars - 3) + "...";
 }
 
 void replaceAll(std::string& s, const std::string& from, const std::string& to)
@@ -389,6 +398,14 @@ public:
             addParam(p);
         }
 
+        for (int i = 0; i < kMaxTargets; ++i)
+        {
+            const std::string id = "jobactive" + std::to_string(i + 1), nm = "Active Job " + std::to_string(i + 1);
+            mpc::Param p = mpc::floatParam(id.c_str(), nm.c_str(), 0.0f, 1.0f, 0.0f);
+            p.automatable = false;
+            addParam(p);
+        }
+
         refreshTexts(false);                // damit der erste Anzeigetext schon stimmt
         lastTarget_ = getInt(kTarget);
 
@@ -435,9 +452,27 @@ public:
     // Anzeigetexte für Name, Quelle und Ziel des gewählten Targets.
     bool formatValue(int index, float plainValue, std::string& out) override
     {
-        (void)plainValue;
         std::lock_guard<std::mutex> lock(textMutex_);
         if (index >= kJob1 && index <= kJobLast) { out = txtJobs_[index - kJob1]; return true; }
+        if (index >= kJobA1 && index <= kJobALast) { out = txtJobsActive_[index - kJobA1]; return true; }
+        if (index == kTarget)
+        {
+            // "2  Backup Samples": Nummer und Name des Ziels, auch beim Drehen schon für den neuen Wert.
+            const int n = (int)std::lround(plainValue);
+            out = std::to_string(n);
+            if (n >= 1 && n <= kMaxTargets && !txtNames_[n - 1].empty()) out += "  " + fitHead(txtNames_[n - 1], 13);
+            return true;
+        }
+        if (index == kStatus)
+        {
+            static const char* const names[] = { "Ready", "Running", "Done", "Failed", "No rsync", "No ssh", "No config", "Bad target", "Cannot run" };
+            int st = (int)std::lround(plainValue);
+            if (st < 0) st = 0;
+            if (st > 8) st = 8;
+            out = names[st];
+            if (st == kStRunning && txtProgress_ != "-" && !txtProgress_.empty()) out += " " + txtProgress_;
+            return true;
+        }
         if (index == kProgress) { out = txtProgress_; return true; }
         if (index != kSource && index != kDest && index != kTargetName) return false;
         out = (index == kSource) ? txtSource_ : (index == kDest) ? txtDest_ : txtName_;
@@ -451,7 +486,7 @@ private:
         info.name         = "MPC Folder Sync";
         info.vendor       = "Noirescripts";   // muss zu plugin.json "manufacturer" passen
         info.uniqueId     = MPC_FOURCC(kUid[0], kUid[1], kUid[2], kUid[3]);   // muss zu plugin.json "uid" passen
-        info.version      = 1300;             // 1.3.0.0
+        info.version      = 1400;             // 1.4.0.0
         info.isInstrument = true;             // Instrumente erscheinen als Plugin-Programm, Effekte nur als Insert
         info.numInputs    = 0;
         info.numOutputs   = 2;
@@ -494,22 +529,31 @@ private:
         name = fitText(name); source = fitText(source); dest = fitText(dest);
 
         // Jobliste: eine Zeile pro Ziel, das gewählte ist mit ">" markiert. Unbenutzte Zeilen bleiben leer.
-        std::string jobs[kMaxTargets];
+        // Der aktive Job steht im Parameter "Active Job", alle anderen in "Job": so kann die Oberfläche ihn farbig zeigen.
+        std::string jobs[kMaxTargets], jobsActive[kMaxTargets], names[kMaxTargets];
         for (int i = 0; i < kMaxTargets; ++i)
         {
+            jobs[i] = " "; jobsActive[i] = " ";
             if (haveFile && i < (int)targets.size())
             {
                 const std::string& n = targets[(size_t)i].name;
-                jobs[i] = fitText(std::string(i == idx ? "> " : "   ") + std::to_string(i + 1) + "  " + (n.empty() ? std::string("(no name)") : n));
+                names[i] = n;
+                const bool active = (i == idx);
+                const std::string line = fitHead(std::string(active ? "> " : "   ") + std::to_string(i + 1) + "  " + (n.empty() ? std::string("(no name)") : n), 23);
+                (active ? jobsActive[i] : jobs[i]) = line;
             }
-            else jobs[i] = (i == 0 && !haveFile) ? std::string("   (no config)") : std::string(" ");
+            else if (i == 0 && !haveFile) jobs[i] = "   (no config)";
         }
 
         bool changed;
         {
             std::lock_guard<std::mutex> lock(textMutex_);
             changed = (name != txtName_) || (source != txtSource_) || (dest != txtDest_);
-            for (int i = 0; i < kMaxTargets; ++i) { if (jobs[i] != txtJobs_[i]) changed = true; txtJobs_[i] = jobs[i]; }
+            for (int i = 0; i < kMaxTargets; ++i)
+            {
+                if (jobs[i] != txtJobs_[i] || jobsActive[i] != txtJobsActive_[i] || names[i] != txtNames_[i]) changed = true;
+                txtJobs_[i] = jobs[i]; txtJobsActive_[i] = jobsActive[i]; txtNames_[i] = names[i];
+            }
             txtName_ = name; txtSource_ = source; txtDest_ = dest;
         }
         if (!notify || !changed) return;
@@ -521,7 +565,12 @@ private:
         notifyHostParameterChanged(kSource);
         notifyHostParameterChanged(kDest);
         notifyHostParameterChanged(kTargetName);
-        for (int i = 0; i < kMaxTargets; ++i) { set(kJob1 + i, v); notifyHostParameterChanged(kJob1 + i); }
+        for (int i = 0; i < kMaxTargets; ++i)
+        {
+            set(kJob1 + i, v); notifyHostParameterChanged(kJob1 + i);
+            set(kJobA1 + i, v); notifyHostParameterChanged(kJobA1 + i);
+        }
+        notifyHostParameterChanged(kTarget);   // Anzeige "2  Name" neu lesen
         requestDisplayUpdate();
     }
 
@@ -569,6 +618,7 @@ private:
         textTick_ = (textTick_ + 1) % 100;
         set(kProgress, (float)textTick_ / 100.0f);
         notifyHostParameterChanged(kProgress);
+        notifyHostParameterChanged(kStatus);   // der Status zeigt "Running 45%"
         requestDisplayUpdate();
     }
 
@@ -933,7 +983,7 @@ private:
 
     std::mutex        textMutex_;
     std::string       txtName_, txtSource_, txtDest_;
-    std::string       txtJobs_[kMaxTargets];
+    std::string       txtJobs_[kMaxTargets], txtJobsActive_[kMaxTargets], txtNames_[kMaxTargets];
     std::string       txtProgress_ = "-";
 };
 

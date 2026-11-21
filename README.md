@@ -8,13 +8,12 @@ One page, **SYNC**:
 
 | Element | Function |
 |---|---|
-| Target | Target 1-8 from `foldersync.conf` (Q-Link 13 or tap) |
+| Target | Target 1-8 from `foldersync.conf`, shown as number and job name (Q-Link 13 or tap) |
 | Start Sync | Push button: one press starts the sync, shows "RUNNING" while it runs |
-| Status | Display only: Ready, Running, Done, Failed, No rsync, No ssh, No config, Bad target, Cannot run |
+| Status | Display only: Ready, Running (with progress in %, e.g. "Running 45%"), Done, Failed, No rsync, No ssh, No config, Bad target, Cannot run |
 | Dry Run | On = trial run (`rsync -n`), nothing is copied |
-| Name / Source / Destination | Text only: selected target, source folder on the MPC, destination as `user@host:folder` |
-| Progress | Text only: sync progress in percent (overall progress from rsync), 100% when finished |
-| Job 1-8 | List of all targets from the configuration, one under the other, the selected one marked with `>` |
+| Source / Destination | Text only (large): source folder on the MPC and destination as `user@host:folder` of the selected job |
+| Job list | All jobs from the configuration in two columns of four. The selected job is marked with `>` and shown in the accent colour |
 
 Loading a project never starts a sync by itself.
 
@@ -73,8 +72,8 @@ For the duration of the sync, rsync, the SSH client and the key are copied to `/
 
 ## Limits / not tested on hardware
 
+- Confirmed on an MPC One (Gen 1, OS 3.10.1): plugin appears under Plugins, button, status, progress, job list and a real sync work.
 - Tested: build for arm32, arm64 and native, validation, host simulator, and sync against a local SSH server with the built programs (dry run, copying, deleting, OpenSSH key, password login, excludes, progress, error cases, abort, cleanup). The ARM programs themselves could not be run in the test environment.
-- To check on the MPC: whether `/tmp` is executable (otherwise status "Cannot run"), whether status and texts redraw immediately, and how the button looks.
 - Text displays are limited to about 31 characters; for long paths the start is replaced by `...`.
 - Plugins run unprotected inside the MPC process: save your project before the first test.
 - Versions 1.1 and newer have a new plugin ID (`N2fs`). Remove the old effect version (1.0) from the `VST2 Plugins` folder first.
