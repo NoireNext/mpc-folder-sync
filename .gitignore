@@ -1,0 +1,14 @@
+# Build-Ausgabe
+build/
+dist/
+
+# Persoenliche Daten nie einchecken
+Content/foldersync.log
+Content/known_hosts
+Content/home/
+Content/id_*
+Content/*.key
+Content/*.pem
+foldersync.local.conf
+skin-src/ui.json.old
+__pycache__/

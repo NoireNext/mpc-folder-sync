@@ -1,0 +1,17 @@
+{
+  "name": "MPC Folder Sync",
+  "manufacturer": "Noirescripts",
+  "version": "1.3.0",
+  "format": "vst2",
+  "kind": "instrument",
+  "uid": "N2fs",
+  "numInputs": 0,
+  "numOutputs": 2,
+  "category": "Utility",
+  "file32": "VST/mpc-folder-sync-arm32.so",
+  "file64": "VST/mpc-folder-sync-arm64.so",
+  "description": "Synchronisiert einen Ordner der MPC per rsync ueber SSH auf einen Server oder ein NAS. Ziele stehen in Content/foldersync.conf. Das Plugin erzeugt keinen Klang.",
+  "author": "Noirescripts",
+  "url": "",
+  "license": "MIT (Plugin-Code); mitgelieferte Programme siehe Content/bin/THIRD_PARTY.txt"
+}

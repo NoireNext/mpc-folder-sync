@@ -1,0 +1,41 @@
+MPC Folder Sync - mitgelieferte Programme / bundled programs
+==============================================================
+
+Dieses Plugin bringt zwei fertig uebersetzte Programme mit, weil die MPC selbst weder
+rsync noch einen SSH-Client enthaelt. Der Plugin-Code (MPC Folder Sync, Noirescripts) steht unter
+der MIT-Lizenz; die folgenden Programme stehen unter ihren eigenen Lizenzen.
+
+This plugin ships two prebuilt programs because the MPC itself has neither rsync nor an SSH
+client. The plugin code (MPC Folder Sync, Noirescripts) is MIT licensed; the programs below keep
+their own licences.
+
+1. rsync 3.4.1   (arm32/rsync, arm64/rsync)
+   Lizenz / licence: GNU GPL version 3 or later, Text: licenses/rsync-COPYING.txt
+   Quelle / source:  https://github.com/RsyncProject/rsync   (Tag v3.4.1, Commit 3305a7a)
+   Gebaut mit / built with:
+     ./configure --disable-openssl --disable-xxhash --disable-zstd --disable-lz4 \
+       --disable-md2man --disable-acl-support --disable-xattr-support --disable-iconv \
+       --disable-locale --with-included-popt --with-included-zlib CFLAGS="-Os" LDFLAGS="-static"
+   Compiler: zig cc 0.17.1 (clang), Ziel arm-linux-musleabihf (arm32, cortex-a17) und
+             aarch64-linux-musl (arm64, cortex-a55), statisch gegen musl gelinkt.
+   Der vollstaendige Quelltext ist unter der oben genannten Adresse (Tag v3.4.1) erhaeltlich;
+   die Programme sind unveraendert aus diesem Quelltext gebaut.
+   The complete source code is available at the address above (tag v3.4.1); the binaries are built
+   unmodified from that source.
+
+2. Dropbear (dbclient + dropbearconvert, ein Programm "dropbearmulti")
+   (arm32/dropbearmulti, arm64/dropbearmulti)
+   Lizenz / licence: MIT-aehnlich / MIT-style, Text: licenses/dropbear-LICENSE.txt
+   Quelle / source:  https://github.com/mkj/dropbear   (Commit 99baf18, November 2026)
+   Gebaut mit / built with:
+     ./configure --enable-static --disable-zlib --disable-pam --disable-lastlog --disable-utmp \
+       --disable-utmpx --disable-wtmp --disable-wtmpx --disable-loginfunc --disable-pututline \
+       --disable-pututxline CFLAGS="-Os" LDFLAGS="-s"
+     make MULTI=1 PROGRAMS="dbclient dropbearconvert" STATIC=1
+   Verwendet wird es als SSH-Client fuer rsync (dbclient) und um OpenSSH-Schluessel in das
+   Dropbear-Format zu uebersetzen (dropbearconvert).
+
+Hinweis: Statisch mit musl gelinkt bedeutet, dass Rechnernamen nur ueber DNS oder /etc/hosts
+aufgeloest werden, nicht ueber mDNS (".local"). Am besten die IP-Adresse des Ziels eintragen.
+Note: statically linked with musl means host names resolve via DNS or /etc/hosts only, not mDNS
+(".local"). Using the target's IP address is the safest.
