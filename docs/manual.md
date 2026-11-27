@@ -55,14 +55,16 @@ A `/` at the end of `source` copies the contents of the folder, without it the f
 
 1. Select the plugin on the main screen.
 2. On the far left the job number is shown. Use the first Q-Link to select the job.
-3. Next to it is the **Start Sync** button.
+3. Next to it is the **Start Sync** button. You can also start the sync with the second Q-Link of the top row.
 4. Then the **Status**, which shows whether a sync is currently running.
 5. The **Dry Run** switch is for testing the job without copying anything. It is also a good way
    to check the SSH login.
 6. The **Target** field shows the job number and its name.
-7. While a sync runs, the **Status** shows the progress in %, for example `Running 45%`.
+7. The **Progress** field shows the progress of a running sync in %.
 8. Below that, the source and destination path of the selected job are shown in large text.
-9. At the bottom all configured jobs are listed in two columns of four. The currently selected job
-   is marked with `>` and shown in the accent colour.
+9. At the bottom is the job table with two blocks of four rows: a box with the job number, then the
+   job name. The selected job has a filled number box and its name in the accent colour.
+   **Tap a job to select it** (this only selects it; use **Start Sync** to run it). Selecting with the
+   first Q-Link works as before. Jobs that are not in the configuration show their number and a grey `unconfigured`.
 
 The complete output of every run is written to `Content/foldersync.log`.

@@ -8,12 +8,13 @@ One page, **SYNC**:
 
 | Element | Function |
 |---|---|
-| Target | Target 1-8 from `foldersync.conf`, shown as number and job name (Q-Link 13 or tap) |
-| Start Sync | Push button: one press starts the sync, shows "RUNNING" while it runs |
-| Status | Display only: Ready, Running (with progress in %, e.g. "Running 45%"), Done, Failed, No rsync, No ssh, No config, Bad target, Cannot run |
+| Target | Target 1-8 from `foldersync.conf`, shown as number and job name (Q-Link 13 or tap on a job in the table) |
+| Start Sync | Push button: one press starts the sync, shows "RUNNING" while it runs. It can also be started with the second Q-Link of the top row (turn it one click clockwise) |
+| Status | Display only: Ready, Running, Done, Failed, No rsync, No ssh, No config, Bad target, Cannot run |
+| Progress | Display only: progress of the running sync in percent (overall progress from rsync) |
 | Dry Run | On = trial run (`rsync -n`), nothing is copied |
 | Source / Destination | Text only (large): source folder on the MPC and destination as `user@host:folder` of the selected job |
-| Job list | All jobs from the configuration in two columns of four. The selected job is marked with `>` and shown in the accent colour |
+| Job table | All jobs from the configuration in a table of two blocks with four rows each: job number in a box, then the name. **Tap a job to select it** (it does not start the sync). The selected job has a filled number box and its name in the accent colour. Jobs that are not in the configuration show their number and a grey `unconfigured` |
 
 Loading a project never starts a sync by itself.
 

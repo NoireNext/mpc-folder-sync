@@ -71,6 +71,10 @@ enum ParamIndex
     kProgress,     // reine Textanzeige: Fortschritt in Prozent während des Syncs
     kJobA1,        // kJobA1 .. kJobA1+7: wie Job 1-8, aber nur die aktive Zeile hat Text (wird farbig angezeigt)
     kJobALast = kJobA1 + 7,
+    kSelect1,      // kSelect1 .. kSelect1+7: Tasten zum Antippen eines Jobs; leuchten beim aktiven Job, Anzeigetext = Jobnummer
+    kSelectLast = kSelect1 + 7,
+    kJobU1,        // kJobU1 .. kJobU1+7: Text "unconfigured" für Jobs, die nicht in der Konfiguration stehen (gedämpfte Farbe)
+    kJobULast = kJobU1 + 7,
     kNumParams
 };
 
@@ -406,6 +410,22 @@ public:
             addParam(p);
         }
 
+        for (int i = 0; i < kMaxTargets; ++i)
+        {
+            const std::string id = "select" + std::to_string(i + 1), nm = "Select Job " + std::to_string(i + 1);
+            mpc::Param p = mpc::boolParam(id.c_str(), nm.c_str(), false);
+            p.automatable = false;
+            addParam(p);
+        }
+
+        for (int i = 0; i < kMaxTargets; ++i)
+        {
+            const std::string id = "jobunconf" + std::to_string(i + 1), nm = "Unconfigured Job " + std::to_string(i + 1);
+            mpc::Param p = mpc::floatParam(id.c_str(), nm.c_str(), 0.0f, 1.0f, 0.0f);
+            p.automatable = false;
+            addParam(p);
+        }
+
         refreshTexts(false);                // damit der erste Anzeigetext schon stimmt
         lastTarget_ = getInt(kTarget);
 
@@ -447,6 +467,8 @@ public:
     {
         if (index == kStart && plainValue >= 0.5f && armed_.load() && !running_.load())
             startPending_.store(true);
+        if (index >= kSelect1 && index <= kSelectLast && plainValue >= 0.5f && armed_.load() && !running_.load())
+            selectPending_.store(index - kSelect1 + 1);   // Job per Touch gewählt, der Worker setzt Target
     }
 
     // Anzeigetexte für Name, Quelle und Ziel des gewählten Targets.
@@ -455,6 +477,7 @@ public:
         std::lock_guard<std::mutex> lock(textMutex_);
         if (index >= kJob1 && index <= kJobLast) { out = txtJobs_[index - kJob1]; return true; }
         if (index >= kJobA1 && index <= kJobALast) { out = txtJobsActive_[index - kJobA1]; return true; }
+        if (index >= kJobU1 && index <= kJobULast) { out = txtJobsUnconf_[index - kJobU1]; return true; }
         if (index == kTarget)
         {
             // "2  Backup Samples": Nummer und Name des Ziels, auch beim Drehen schon für den neuen Wert.
@@ -470,10 +493,15 @@ public:
             if (st < 0) st = 0;
             if (st > 8) st = 8;
             out = names[st];
-            if (st == kStRunning && txtProgress_ != "-" && !txtProgress_.empty()) out += " " + txtProgress_;
             return true;
         }
         if (index == kProgress) { out = txtProgress_; return true; }
+        if (index >= kSelect1 && index <= kSelectLast)
+        {
+            const int n = index - kSelect1 + 1;
+            out = std::to_string(n);   // die Nummer steht immer da, auch bei nicht konfigurierten Jobs
+            return true;
+        }
         if (index != kSource && index != kDest && index != kTargetName) return false;
         out = (index == kSource) ? txtSource_ : (index == kDest) ? txtDest_ : txtName_;
         return true;
@@ -486,7 +514,7 @@ private:
         info.name         = "MPC Folder Sync";
         info.vendor       = "Noirescripts";   // muss zu plugin.json "manufacturer" passen
         info.uniqueId     = MPC_FOURCC(kUid[0], kUid[1], kUid[2], kUid[3]);   // muss zu plugin.json "uid" passen
-        info.version      = 1400;             // 1.4.0.0
+        info.version      = 1600;             // 1.6.0.0
         info.isInstrument = true;             // Instrumente erscheinen als Plugin-Programm, Effekte nur als Insert
         info.numInputs    = 0;
         info.numOutputs   = 2;
@@ -530,19 +558,20 @@ private:
 
         // Jobliste: eine Zeile pro Ziel, das gewählte ist mit ">" markiert. Unbenutzte Zeilen bleiben leer.
         // Der aktive Job steht im Parameter "Active Job", alle anderen in "Job": so kann die Oberfläche ihn farbig zeigen.
-        std::string jobs[kMaxTargets], jobsActive[kMaxTargets], names[kMaxTargets];
+        jobCount_.store(haveFile ? (int)targets.size() : 0);
+        std::string jobs[kMaxTargets], jobsActive[kMaxTargets], jobsUnconf[kMaxTargets], names[kMaxTargets];
         for (int i = 0; i < kMaxTargets; ++i)
         {
-            jobs[i] = " "; jobsActive[i] = " ";
+            jobs[i] = " "; jobsActive[i] = " "; jobsUnconf[i] = " ";
             if (haveFile && i < (int)targets.size())
             {
                 const std::string& n = targets[(size_t)i].name;
                 names[i] = n;
                 const bool active = (i == idx);
-                const std::string line = fitHead(std::string(active ? "> " : "   ") + std::to_string(i + 1) + "  " + (n.empty() ? std::string("(no name)") : n), 23);
+                const std::string line = fitHead(n.empty() ? std::string("(no name)") : n, 18);
                 (active ? jobsActive[i] : jobs[i]) = line;
             }
-            else if (i == 0 && !haveFile) jobs[i] = "   (no config)";
+            else jobsUnconf[i] = "unconfigured";
         }
 
         bool changed;
@@ -551,8 +580,8 @@ private:
             changed = (name != txtName_) || (source != txtSource_) || (dest != txtDest_);
             for (int i = 0; i < kMaxTargets; ++i)
             {
-                if (jobs[i] != txtJobs_[i] || jobsActive[i] != txtJobsActive_[i] || names[i] != txtNames_[i]) changed = true;
-                txtJobs_[i] = jobs[i]; txtJobsActive_[i] = jobsActive[i]; txtNames_[i] = names[i];
+                if (jobs[i] != txtJobs_[i] || jobsActive[i] != txtJobsActive_[i] || jobsUnconf[i] != txtJobsUnconf_[i] || names[i] != txtNames_[i]) changed = true;
+                txtJobs_[i] = jobs[i]; txtJobsActive_[i] = jobsActive[i]; txtJobsUnconf_[i] = jobsUnconf[i]; txtNames_[i] = names[i];
             }
             txtName_ = name; txtSource_ = source; txtDest_ = dest;
         }
@@ -569,6 +598,8 @@ private:
         {
             set(kJob1 + i, v); notifyHostParameterChanged(kJob1 + i);
             set(kJobA1 + i, v); notifyHostParameterChanged(kJobA1 + i);
+            set(kJobU1 + i, v); notifyHostParameterChanged(kJobU1 + i);
+            notifyHostParameterChanged(kSelect1 + i);   // Nummer im Kästchen neu lesen
         }
         notifyHostParameterChanged(kTarget);   // Anzeige "2  Name" neu lesen
         requestDisplayUpdate();
@@ -599,8 +630,15 @@ private:
             }
             else
             {
+                const int sel = selectPending_.exchange(0);
+                if (sel >= 1 && sel <= kMaxTargets && sel <= jobCount_.load() && sel != getInt(kTarget))
+                {
+                    set(kTarget, (float)sel);
+                    notifyHostParameterChanged(kTarget);
+                }
                 const int cur = getInt(kTarget);
                 if (cur != lastTarget_) { lastTarget_ = cur; needRefresh_.store(true); }
+                updateSelectKeys();
                 if (needRefresh_.exchange(false)) refreshTexts(true);
                 usleep(100000);
             }
@@ -618,7 +656,6 @@ private:
         textTick_ = (textTick_ + 1) % 100;
         set(kProgress, (float)textTick_ / 100.0f);
         notifyHostParameterChanged(kProgress);
-        notifyHostParameterChanged(kStatus);   // der Status zeigt "Running 45%"
         requestDisplayUpdate();
     }
 
@@ -657,6 +694,21 @@ private:
         };
         for (uint8_t c : bytes) { if (c == '\n' || c == '\r') flush(); else cur.push_back((char)c); }
         flush();
+    }
+
+    // Nur der Job-Knopf des gewählten Targets leuchtet. Nach dem Antippen springt die Taste zurück, hier wird sie wieder gesetzt.
+    void updateSelectKeys()
+    {
+        const int cur = getInt(kTarget) - 1, count = jobCount_.load();
+        for (int i = 0; i < kMaxTargets; ++i)
+        {
+            const float want = (i == cur && i < count) ? 1.0f : 0.0f;
+            if (std::fabs(getNormalised(kSelect1 + i) - want) > 0.5f)
+            {
+                setNormalised(kSelect1 + i, want);
+                notifyHostParameterChanged(kSelect1 + i);
+            }
+        }
     }
 
     // Hält den Start-Button leuchtend, solange der Sync läuft (auch wenn jemand ihn währenddessen antippt).
@@ -953,7 +1005,7 @@ private:
                 if (waitpid(pid, &status, WNOHANG) != pid) { kill(pid, SIGKILL); waitpid(pid, &status, 0); }
                 return -2;
             }
-            if (keepLit) keepButtonLit();
+            if (keepLit) { keepButtonLit(); updateSelectKeys(); }
             if (!progressPath.empty())
             {
                 const int pc = lastPercent(progressPath);
@@ -978,12 +1030,14 @@ private:
     std::atomic<bool> running_{false};
     std::atomic<bool> armed_{false};
     std::atomic<bool> needRefresh_{false};
+    std::atomic<int>  selectPending_{0};
+    std::atomic<int>  jobCount_{0};
     int               lastTarget_ = 1;     // nur vom Worker-Thread benutzt
     unsigned          textTick_ = 0;       // nur vom Worker-Thread benutzt
 
     std::mutex        textMutex_;
     std::string       txtName_, txtSource_, txtDest_;
-    std::string       txtJobs_[kMaxTargets], txtJobsActive_[kMaxTargets], txtNames_[kMaxTargets];
+    std::string       txtJobs_[kMaxTargets], txtJobsActive_[kMaxTargets], txtJobsUnconf_[kMaxTargets], txtNames_[kMaxTargets];
     std::string       txtProgress_ = "-";
 };
 
