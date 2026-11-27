@@ -9,7 +9,7 @@ One page, **SYNC**:
 | Element | Function |
 |---|---|
 | Target | Target 1-8 from `foldersync.conf`, shown as number and job name (Q-Link 13 or tap on a job in the table) |
-| Start Sync | Push button: one press starts the sync, shows "RUNNING" while it runs. It can also be started with the second Q-Link of the top row (turn it one click clockwise) |
+| Start Sync | Push button: one press starts the sync, shows "RUNNING" while it runs. |
 | Status | Display only: Ready, Running, Done, Failed, No rsync, No ssh, No config, Bad target, Cannot run |
 | Progress | Display only: progress of the running sync in percent (overall progress from rsync) |
 | Dry Run | On = trial run (`rsync -n`), nothing is copied |

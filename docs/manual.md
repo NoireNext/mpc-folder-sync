@@ -55,7 +55,7 @@ A `/` at the end of `source` copies the contents of the folder, without it the f
 
 1. Select the plugin on the main screen.
 2. On the far left the job number is shown. Use the first Q-Link to select the job.
-3. Next to it is the **Start Sync** button. You can also start the sync with the second Q-Link of the top row.
+3. Next to it is the **Start Sync** button (touch only; it cannot be started with a Q-Link).
 4. Then the **Status**, which shows whether a sync is currently running.
 5. The **Dry Run** switch is for testing the job without copying anything. It is also a good way
    to check the SSH login.

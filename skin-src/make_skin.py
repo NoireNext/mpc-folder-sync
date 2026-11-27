@@ -53,6 +53,11 @@ def cell_png(path, w, h, on, tint):
     d.rounded_rectangle([sc, sc, w * sc - sc - 1, h * sc - sc - 1], radius=9 * sc, fill=fill, outline=line, width=(3 if on else 2) * sc)
     im.resize((w, h), Image.LANCZOS).save(path)
 
+HIT_W = NAME_DX + NAME_W
+def hit_png(path, w, h):
+    """Fast unsichtbare Touchflaeche (alpha 4): liegt ueber Zelle UND Text und faengt die Beruehrung ab."""
+    Image.new("RGBA", (w, h), (30, 29, 30, 4)).save(path)
+hit_png(os.path.join(OUT, "hit.png"), HIT_W, CELL_H)
 button_png(os.path.join(OUT, "start_off.png"), "START SYNC", False)
 button_png(os.path.join(OUT, "start_on.png"), "RUNNING", True)
 for nm, w, tint in (("num", NUM_W, True), ("name", NAME_W, False)):
@@ -66,7 +71,7 @@ for n in ("toggle_on.png", "toggle_off.png"):
     if os.path.abspath(src) != os.path.abspath(os.path.join(OUT, n)):
         shutil.copy2(src, os.path.join(OUT, n))
 KEEP = {"start_on.png", "start_off.png", "toggle_on.png", "toggle_off.png",
-        "cell_num_on.png", "cell_num_off.png", "cell_name_on.png", "cell_name_off.png"}
+        "cell_num_on.png", "cell_num_off.png", "cell_name_on.png", "cell_name_off.png", "hit.png"}
 for junk in glob.glob(os.path.join(OUT, "*.png")) + glob.glob(os.path.join(OUT, "kit.json")):
     if os.path.basename(junk) not in KEEP:
         os.remove(junk)
@@ -105,6 +110,17 @@ for kind, w in (("num", NUM_W), ("name", NAME_W)):
     defs.append(("cell " + kind, g.component_definition([g.action("Mouse Down", "Q-Link", "Data", "")], [
         E("button", "Button", g.button_data("cell_%s_on.png" % kind, "cell_%s_off.png" % kind, 1, 1), "0 0 %d %d" % (w, CELL_H), "No", "Show", "Always")],
         "00000000")))
+# Tabellentexte: eigene Komponenten, die Beruehrungen NICHT abfangen (sonst kommt der Touch nicht bis zur Zelle darunter)
+for tag, colour, just, pt in (("num", S["text"], "horizontallyCentred verticallyCentred", 44.0),
+                              ("normal", S["text"], "left verticallyCentred", 48.0),
+                              ("active", S["accent"], "left verticallyCentred", 48.0),
+                              ("unconfigured", UNCONF, "left verticallyCentred", 48.0)):
+    w = NUM_W if tag == "num" else NAME_W - 28
+    defs.append(("jobtext " + tag, g.component_definition([], [
+        E("text", "Label", g.label_data("Value", colour, pt, just), "0 0 %d %d" % (w, CELL_H), "No", "Show", "Always")],
+        "00000000", ignore_mouse=True)))
+defs.append(("hit", g.component_definition([g.action("Mouse Down", "Q-Link", "Data", "")], [
+    E("button", "Button", g.button_data("hit.png", "hit.png", 1, 1), "0 0 %d %d" % (HIT_W, CELL_H), "No", "Show", "Always")], "00000000")))
 defs.append(("knob overlay", g.overlay_component("KnobOverlay", g.knob_overlay_data(False), S["background"])))
 defs.append(("menu overlay", g.overlay_component("MenuOverlay", g.menu_overlay_data(), S["background"])))
 
@@ -129,26 +145,29 @@ for n, (nm, p) in enumerate([("Source", 4), ("Destination", 5)]):
 # Reihenfolge: erst die Zellen (Tasten), darueber die Texte.
 cells = []
 labels = []
+hits = []
 for i in range(8):
     col, r = divmod(i, 4)
     x, y = 25 + BLOCK_DX * col, TABLE_Y + ROW_PITCH * r
     nx = x + NAME_DX
-    labels.append(E("Job %d number" % (i + 1), "Label", g.label_data("Value", S["text"], 44.0, "horizontallyCentred verticallyCentred"),
+    labels.append(E("Job %d number" % (i + 1), "jobtext num", g.obj(("version", 1), ("handleName", "Data")),
                   "%d %d %d %d" % (x, y, NUM_W, CELL_H), "No", "Show", "Always", remap=[("Data", "Parameter %d" % (24 + i))]))
-    for first, colour, tag in ((7, S["text"], "normal"), (16, S["accent"], "active"), (32, UNCONF, "unconfigured")):
-        labels.append(E("Job %d name %s" % (i + 1, tag), "Label", g.label_data("Value", colour, 48.0, "left verticallyCentred"),
+    for first, tag in ((7, "normal"), (16, "active"), (32, "unconfigured")):
+        labels.append(E("Job %d name %s" % (i + 1, tag), "jobtext " + tag, g.obj(("version", 1), ("handleName", "Data")),
                       "%d %d %d %d" % (nx + 16, y, NAME_W - 28, CELL_H), "No", "Show", "Always",
                       remap=[("Data", "Parameter %d" % (first + i))]))
+    hits.append(E("Job %d touch" % (i + 1), "hit", g.obj(("version", 1), ("handleName", "Data")),
+                  "%d %d %d %d" % (x, y, HIT_W, CELL_H), "Yes", "Show", "Always",
+                  remap=[("Data", "ResetOnGestureEnd/Parameter %d" % (24 + i))]))
     for kind, cx, w in (("num", x, NUM_W), ("name", nx, NAME_W)):
         cells.append(E("Job %d %s cell" % (i + 1, kind), "cell " + kind, g.obj(("version", 1), ("handleName", "Data")),
                        "%d %d %d %d" % (cx, y, w, CELL_H), "Yes", "Show", "Always", remap=[("Data", "Parameter %d" % (24 + i))]))
 
-kids += cells + labels      # Zellen unten, Texte darueber
+kids += cells + labels + hits      # Zellen unten, Texte darueber, Touchflaeche ganz oben
 tab = g.component_definition([], kids, S["background"])
 rects = ["%d %d %d %d" % (13, TOP_Y - g.QLINK_PAD, 1261 + g.QLINK_PAD - 13, TOP_H + 2 * g.QLINK_PAD)]
-# Zweistufige Parameter brauchen zwei Texte, damit ein Q-Link-Klick sie sicher umschaltet (sonst ist der Drehweg fein gestuft).
-repl = [g.obj(("key", "Parameter 1"), ("value", ["Idle", "Start"])),
-        g.obj(("key", "Parameter 3"), ("value", ["Off", "On"]))]
+# Zweistufiger Parameter braucht zwei Texte, damit ein Q-Link-Klick ihn sicher umschaltet.
+repl = [g.obj(("key", "Parameter 3"), ("value", ["Off", "On"]))]
 page = g.obj(("version", 1),
              ("componentDefinitions", g.obj(("version", 2), ("importFiles", []),
                                             ("localComponentDefinitions", [g.obj(("key", k), ("value", v)) for k, v in defs]))),
@@ -158,8 +177,8 @@ page = g.obj(("version", 1),
                              ("componentDefinition", tab), ("qlinkBoundsData", rects))]))
 tui = g.obj(("pageData", page))
 
-qmap = g.Obj(("Q-Link %d" % q, {13: 0, 14: 1, 16: 3}.get(q, -1)) for q in range(1, 17))
-prog = g.Obj(("Q-Link %d" % (q + 1), {0: 0, 1: 1, 2: 3}.get(q, -1)) for q in range(16))
+qmap = g.Obj(("Q-Link %d" % q, {13: 0, 16: 3}.get(q, -1)) for q in range(1, 17))
+prog = g.Obj(("Q-Link %d" % (q + 1), {0: 0, 2: 3}.get(q, -1)) for q in range(16))
 ql = g.obj(("version", 4), ("info", g.obj(("version", 1), ("type", "CompleteDescription"))),
            ("Screen Mode Q-Links", g.obj(("version", 4), ("map", [g.obj(("Tab", 1), ("SubTab", 1), ("Bank Direction", "RowTopDown"), ("Q-Links", qmap))]))),
            ("Program Mode Q-Links", prog))

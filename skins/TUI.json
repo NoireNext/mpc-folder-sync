@@ -826,6 +826,311 @@
                     }
                 },
                 {
+                    "key": "jobtext num",
+                    "value": {
+                        "version": 2,
+                        "actions": [],
+                        "backgroundData": {
+                            "version": 1,
+                            "focussed": {
+                                "version": 1,
+                                "colour": "00000000",
+                                "image": ""
+                            },
+                            "unfocussed": {
+                                "version": 1,
+                                "colour": "00000000",
+                                "image": ""
+                            }
+                        },
+                        "ignoreMousePresses": true,
+                        "disableCoarseDataWheel": false,
+                        "componentsData": [
+                            {
+                                "version": 2,
+                                "componentData": {
+                                    "version": 1,
+                                    "name": "text",
+                                    "type": "Label",
+                                    "data": {
+                                        "version": 1,
+                                        "textStyle": {
+                                            "version": 1,
+                                            "font": {
+                                                "version": 1,
+                                                "name": "Titillium Web",
+                                                "style": "Regular",
+                                                "height": 44.0
+                                            },
+                                            "colour": "ffffffff",
+                                            "justification": "horizontallyCentred verticallyCentred",
+                                            "case": "Original"
+                                        },
+                                        "type": "Value",
+                                        "handleName": "Data"
+                                    }
+                                },
+                                "handle remapping": {
+                                    "version": 1,
+                                    "map": []
+                                },
+                                "bounds": {
+                                    "version": 1,
+                                    "acceptsHWFocus": "No",
+                                    "showWhenDataModelInvalid": "Show",
+                                    "whenVisible": "Always",
+                                    "boundsType": "Absolute",
+                                    "bounds": "0 0 115 70"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "jobtext normal",
+                    "value": {
+                        "version": 2,
+                        "actions": [],
+                        "backgroundData": {
+                            "version": 1,
+                            "focussed": {
+                                "version": 1,
+                                "colour": "00000000",
+                                "image": ""
+                            },
+                            "unfocussed": {
+                                "version": 1,
+                                "colour": "00000000",
+                                "image": ""
+                            }
+                        },
+                        "ignoreMousePresses": true,
+                        "disableCoarseDataWheel": false,
+                        "componentsData": [
+                            {
+                                "version": 2,
+                                "componentData": {
+                                    "version": 1,
+                                    "name": "text",
+                                    "type": "Label",
+                                    "data": {
+                                        "version": 1,
+                                        "textStyle": {
+                                            "version": 1,
+                                            "font": {
+                                                "version": 1,
+                                                "name": "Titillium Web",
+                                                "style": "Regular",
+                                                "height": 48.0
+                                            },
+                                            "colour": "ffffffff",
+                                            "justification": "left verticallyCentred",
+                                            "case": "Original"
+                                        },
+                                        "type": "Value",
+                                        "handleName": "Data"
+                                    }
+                                },
+                                "handle remapping": {
+                                    "version": 1,
+                                    "map": []
+                                },
+                                "bounds": {
+                                    "version": 1,
+                                    "acceptsHWFocus": "No",
+                                    "showWhenDataModelInvalid": "Show",
+                                    "whenVisible": "Always",
+                                    "boundsType": "Absolute",
+                                    "bounds": "0 0 458 70"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "jobtext active",
+                    "value": {
+                        "version": 2,
+                        "actions": [],
+                        "backgroundData": {
+                            "version": 1,
+                            "focussed": {
+                                "version": 1,
+                                "colour": "00000000",
+                                "image": ""
+                            },
+                            "unfocussed": {
+                                "version": 1,
+                                "colour": "00000000",
+                                "image": ""
+                            }
+                        },
+                        "ignoreMousePresses": true,
+                        "disableCoarseDataWheel": false,
+                        "componentsData": [
+                            {
+                                "version": 2,
+                                "componentData": {
+                                    "version": 1,
+                                    "name": "text",
+                                    "type": "Label",
+                                    "data": {
+                                        "version": 1,
+                                        "textStyle": {
+                                            "version": 1,
+                                            "font": {
+                                                "version": 1,
+                                                "name": "Titillium Web",
+                                                "style": "Regular",
+                                                "height": 48.0
+                                            },
+                                            "colour": "ffd31145",
+                                            "justification": "left verticallyCentred",
+                                            "case": "Original"
+                                        },
+                                        "type": "Value",
+                                        "handleName": "Data"
+                                    }
+                                },
+                                "handle remapping": {
+                                    "version": 1,
+                                    "map": []
+                                },
+                                "bounds": {
+                                    "version": 1,
+                                    "acceptsHWFocus": "No",
+                                    "showWhenDataModelInvalid": "Show",
+                                    "whenVisible": "Always",
+                                    "boundsType": "Absolute",
+                                    "bounds": "0 0 458 70"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "jobtext unconfigured",
+                    "value": {
+                        "version": 2,
+                        "actions": [],
+                        "backgroundData": {
+                            "version": 1,
+                            "focussed": {
+                                "version": 1,
+                                "colour": "00000000",
+                                "image": ""
+                            },
+                            "unfocussed": {
+                                "version": 1,
+                                "colour": "00000000",
+                                "image": ""
+                            }
+                        },
+                        "ignoreMousePresses": true,
+                        "disableCoarseDataWheel": false,
+                        "componentsData": [
+                            {
+                                "version": 2,
+                                "componentData": {
+                                    "version": 1,
+                                    "name": "text",
+                                    "type": "Label",
+                                    "data": {
+                                        "version": 1,
+                                        "textStyle": {
+                                            "version": 1,
+                                            "font": {
+                                                "version": 1,
+                                                "name": "Titillium Web",
+                                                "style": "Regular",
+                                                "height": 48.0
+                                            },
+                                            "colour": "ff6a6a6c",
+                                            "justification": "left verticallyCentred",
+                                            "case": "Original"
+                                        },
+                                        "type": "Value",
+                                        "handleName": "Data"
+                                    }
+                                },
+                                "handle remapping": {
+                                    "version": 1,
+                                    "map": []
+                                },
+                                "bounds": {
+                                    "version": 1,
+                                    "acceptsHWFocus": "No",
+                                    "showWhenDataModelInvalid": "Show",
+                                    "whenVisible": "Always",
+                                    "boundsType": "Absolute",
+                                    "bounds": "0 0 458 70"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "hit",
+                    "value": {
+                        "version": 2,
+                        "actions": [
+                            {
+                                "version": 1,
+                                "onAction": "Mouse Down",
+                                "handler": "Q-Link",
+                                "handleName": "Data",
+                                "additionalData": ""
+                            }
+                        ],
+                        "backgroundData": {
+                            "version": 1,
+                            "focussed": {
+                                "version": 1,
+                                "colour": "00000000",
+                                "image": ""
+                            },
+                            "unfocussed": {
+                                "version": 1,
+                                "colour": "00000000",
+                                "image": ""
+                            }
+                        },
+                        "ignoreMousePresses": false,
+                        "disableCoarseDataWheel": false,
+                        "componentsData": [
+                            {
+                                "version": 2,
+                                "componentData": {
+                                    "version": 1,
+                                    "name": "button",
+                                    "type": "Button",
+                                    "data": {
+                                        "version": 2,
+                                        "onImage": "hit.png",
+                                        "offImage": "hit.png",
+                                        "buttonId": 1,
+                                        "numButtonsInGroup": 1,
+                                        "handleName": "Data",
+                                        "gestureBehaviour": "Instant"
+                                    }
+                                },
+                                "handle remapping": {
+                                    "version": 1,
+                                    "map": []
+                                },
+                                "bounds": {
+                                    "version": 1,
+                                    "acceptsHWFocus": "No",
+                                    "showWhenDataModelInvalid": "Show",
+                                    "whenVisible": "Always",
+                                    "boundsType": "Absolute",
+                                    "bounds": "0 0 605 70"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
                     "key": "knob overlay",
                     "value": {
                         "version": 2,
@@ -949,13 +1254,6 @@
             ]
         },
         "replacementStrings": [
-            {
-                "key": "Parameter 1",
-                "value": [
-                    "Idle",
-                    "Start"
-                ]
-            },
             {
                 "key": "Parameter 3",
                 "value": [
@@ -1665,22 +1963,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 1 number",
-                                "type": "Label",
+                                "type": "jobtext num",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 44.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "horizontallyCentred verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -1707,22 +1992,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 1 name normal",
-                                "type": "Label",
+                                "type": "jobtext normal",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -1749,22 +2021,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 1 name active",
-                                "type": "Label",
+                                "type": "jobtext active",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffd31145",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -1791,22 +2050,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 1 name unconfigured",
-                                "type": "Label",
+                                "type": "jobtext unconfigured",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ff6a6a6c",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -1833,22 +2079,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 2 number",
-                                "type": "Label",
+                                "type": "jobtext num",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 44.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "horizontallyCentred verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -1875,22 +2108,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 2 name normal",
-                                "type": "Label",
+                                "type": "jobtext normal",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -1917,22 +2137,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 2 name active",
-                                "type": "Label",
+                                "type": "jobtext active",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffd31145",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -1959,22 +2166,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 2 name unconfigured",
-                                "type": "Label",
+                                "type": "jobtext unconfigured",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ff6a6a6c",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2001,22 +2195,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 3 number",
-                                "type": "Label",
+                                "type": "jobtext num",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 44.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "horizontallyCentred verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2043,22 +2224,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 3 name normal",
-                                "type": "Label",
+                                "type": "jobtext normal",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2085,22 +2253,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 3 name active",
-                                "type": "Label",
+                                "type": "jobtext active",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffd31145",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2127,22 +2282,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 3 name unconfigured",
-                                "type": "Label",
+                                "type": "jobtext unconfigured",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ff6a6a6c",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2169,22 +2311,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 4 number",
-                                "type": "Label",
+                                "type": "jobtext num",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 44.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "horizontallyCentred verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2211,22 +2340,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 4 name normal",
-                                "type": "Label",
+                                "type": "jobtext normal",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2253,22 +2369,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 4 name active",
-                                "type": "Label",
+                                "type": "jobtext active",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffd31145",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2295,22 +2398,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 4 name unconfigured",
-                                "type": "Label",
+                                "type": "jobtext unconfigured",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ff6a6a6c",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2337,22 +2427,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 5 number",
-                                "type": "Label",
+                                "type": "jobtext num",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 44.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "horizontallyCentred verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2379,22 +2456,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 5 name normal",
-                                "type": "Label",
+                                "type": "jobtext normal",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2421,22 +2485,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 5 name active",
-                                "type": "Label",
+                                "type": "jobtext active",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffd31145",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2463,22 +2514,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 5 name unconfigured",
-                                "type": "Label",
+                                "type": "jobtext unconfigured",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ff6a6a6c",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2505,22 +2543,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 6 number",
-                                "type": "Label",
+                                "type": "jobtext num",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 44.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "horizontallyCentred verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2547,22 +2572,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 6 name normal",
-                                "type": "Label",
+                                "type": "jobtext normal",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2589,22 +2601,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 6 name active",
-                                "type": "Label",
+                                "type": "jobtext active",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffd31145",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2631,22 +2630,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 6 name unconfigured",
-                                "type": "Label",
+                                "type": "jobtext unconfigured",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ff6a6a6c",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2673,22 +2659,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 7 number",
-                                "type": "Label",
+                                "type": "jobtext num",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 44.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "horizontallyCentred verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2715,22 +2688,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 7 name normal",
-                                "type": "Label",
+                                "type": "jobtext normal",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2757,22 +2717,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 7 name active",
-                                "type": "Label",
+                                "type": "jobtext active",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffd31145",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2799,22 +2746,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 7 name unconfigured",
-                                "type": "Label",
+                                "type": "jobtext unconfigured",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ff6a6a6c",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2841,22 +2775,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 8 number",
-                                "type": "Label",
+                                "type": "jobtext num",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 44.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "horizontallyCentred verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2883,22 +2804,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 8 name normal",
-                                "type": "Label",
+                                "type": "jobtext normal",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffffffff",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2925,22 +2833,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 8 name active",
-                                "type": "Label",
+                                "type": "jobtext active",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ffd31145",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -2967,22 +2862,9 @@
                             "componentData": {
                                 "version": 1,
                                 "name": "Job 8 name unconfigured",
-                                "type": "Label",
+                                "type": "jobtext unconfigured",
                                 "data": {
                                     "version": 1,
-                                    "textStyle": {
-                                        "version": 1,
-                                        "font": {
-                                            "version": 1,
-                                            "name": "Titillium Web",
-                                            "style": "Regular",
-                                            "height": 48.0
-                                        },
-                                        "colour": "ff6a6a6c",
-                                        "justification": "left verticallyCentred",
-                                        "case": "Original"
-                                    },
-                                    "type": "Value",
                                     "handleName": "Data"
                                 }
                             },
@@ -3002,6 +2884,238 @@
                                 "whenVisible": "Always",
                                 "boundsType": "Absolute",
                                 "bounds": "780 544 458 70"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "Job 1 touch",
+                                "type": "hit",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "ResetOnGestureEnd/Parameter 24"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "Yes",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "25 316 605 70"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "Job 2 touch",
+                                "type": "hit",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "ResetOnGestureEnd/Parameter 25"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "Yes",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "25 392 605 70"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "Job 3 touch",
+                                "type": "hit",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "ResetOnGestureEnd/Parameter 26"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "Yes",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "25 468 605 70"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "Job 4 touch",
+                                "type": "hit",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "ResetOnGestureEnd/Parameter 27"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "Yes",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "25 544 605 70"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "Job 5 touch",
+                                "type": "hit",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "ResetOnGestureEnd/Parameter 28"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "Yes",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "645 316 605 70"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "Job 6 touch",
+                                "type": "hit",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "ResetOnGestureEnd/Parameter 29"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "Yes",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "645 392 605 70"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "Job 7 touch",
+                                "type": "hit",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "ResetOnGestureEnd/Parameter 30"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "Yes",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "645 468 605 70"
+                            }
+                        },
+                        {
+                            "version": 2,
+                            "componentData": {
+                                "version": 1,
+                                "name": "Job 8 touch",
+                                "type": "hit",
+                                "data": {
+                                    "version": 1,
+                                    "handleName": "Data"
+                                }
+                            },
+                            "handle remapping": {
+                                "version": 1,
+                                "map": [
+                                    {
+                                        "key": "Data",
+                                        "value": "ResetOnGestureEnd/Parameter 31"
+                                    }
+                                ]
+                            },
+                            "bounds": {
+                                "version": 1,
+                                "acceptsHWFocus": "Yes",
+                                "showWhenDataModelInvalid": "Show",
+                                "whenVisible": "Always",
+                                "boundsType": "Absolute",
+                                "bounds": "645 544 605 70"
                             }
                         }
                     ]

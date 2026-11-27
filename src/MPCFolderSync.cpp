@@ -514,7 +514,7 @@ private:
         info.name         = "MPC Folder Sync";
         info.vendor       = "Noirescripts";   // muss zu plugin.json "manufacturer" passen
         info.uniqueId     = MPC_FOURCC(kUid[0], kUid[1], kUid[2], kUid[3]);   // muss zu plugin.json "uid" passen
-        info.version      = 1600;             // 1.6.0.0
+        info.version      = 1701;             // 1.7.1.0
         info.isInstrument = true;             // Instrumente erscheinen als Plugin-Programm, Effekte nur als Insert
         info.numInputs    = 0;
         info.numOutputs   = 2;
